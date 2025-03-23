@@ -115,9 +115,13 @@ Para conocer el primer punto, se debe observar la sección que dice `...python31
 
 En el segundo punto, la información relevante se encuentra entre () al final del nombre del paquete. `(2.19.0)` y `(2.5.1)` para `tensorflow` y `torch` respectivamente. Estos números corresponden a la versión de los paquetes y es importante verificar en que canal de Nix Packages están disponibles. Por ejemplo, si buscamos [tensoflowWithCuda en el canal estable](https://search.nixos.org/packages?channel=24.11&from=0&size=50&sort=relevance&type=packages&query=tensorflowWithCuda) (canal estable es 24.11 al momento de escribir esto), nos encontramos con que está la versión 2.13.0 para Python 3.11 y 3.13.
 
-![Resultado de buscar tensorflowWithCuda en paquetes estables 24.11 de Nix Packages](imgs/tensorflowEstableCompleto.png)
 
-![Versión de tensorflowWithCuda resaltado para versión estable 24.11 de Nix Packages](imgs/tensorflowEstable.png)
+![Tensorflow estable 24.11 Completo](imgs/tensorflowEstableCompleto.png)
+Figura 1: Resultados de búsqueda de `tensorflowWithCuda` en el canal estable 24.11 de Nix Packages
+
+
+![Tensorflow estable 24.11 Resaltado](imgs/tensorflowEstable.png)
+Figura 2: Versión de `tensorflowWithCuda` resaltado.
 
 
 
