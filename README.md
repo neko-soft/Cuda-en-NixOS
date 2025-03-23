@@ -258,7 +258,7 @@ Una vez configurado el `shell` o el `flake`, entramos al ambiente con `nix-shell
 import torch
 import tensorflow as tf
 
-toch.cuda.is_available()
+torch.cuda.is_available()
 print(tf.config.list_physical_devices('GPU'))
 ```
 
