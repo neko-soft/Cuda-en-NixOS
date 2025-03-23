@@ -1,42 +1,54 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 
 {
-	imports = [
-		# Include the results of the hardware scan.
-		./hardware-configuration.nix
-		./paquetes.nix
-		./displayManager.nix
-		./bootLoader.nix
-		./localeAndTime.nix
-		./networkAndHost.nix
-		./nvidia.nix
-		./inestables.nix
-    		#./servicios.nix
-		<home-manager/nixos>
-		./cachix.nix
-		./homeManager.nix
-    ];
+	# Configuración básica para GPU Nvidia
+  hardware.graphics.enable = true;
+  services.xserver.videoDrivers = ["nvidia"];
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+    open = false;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
+    nvidiaPersistenced = true;
 
 
-  boot.initrd.luks.devices."luks-95281abb-ec5e-487f-b0a6-555535657144".device = "/dev/disk/by-uuid/95281abb-ec5e-487f-b0a6-555535657144";
+    # Sólo para GPUs híbridas
+    # Tarjeta gráfica integrada + dedicada
+    # Este es el caso de la mayoría de las laptops
+    prime = {
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
+        offload = {
+          enable = true;
+          enableOffloadCmd = true;
+        };
+    };
+  };
 
+
+	# Instalar el paquete de cachix
+	environment.systemPackages = with pkgs; [
+		cachix
+ 	 ];
+
+	# Agregar los Caches de la Nix Community
+	nix.settings = {
+		substituters = [
+			"https://nix-community.cachix.org"
+			"https://cuda-maintainers.cachix.org"
+		];
+		trusted-public-keys = [
+			"nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+			"cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
+		];
+	};
+
+
+	# Activar los flakes
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system = {
-  	stateVersion = "24.05";
-	autoUpgrade = {
-		enable = false;
-		allowReboot = false;
-	};
-  };
+
 }
