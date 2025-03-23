@@ -137,7 +137,7 @@ Figura 3: Resultados de búsqueda de `torchWithCuda` en el [canal estable 24.11 
 Figura 4: Versión de `torchWithCuda` resaltado.
 
 
-### Verificaión canal inestable
+### Verificación canal inestable
 
 Como `tensorflow` no tiene binarios en el canal estable 24.11, buscamos los mismos paquetes, pero en el [canal unstable de Nix Packages](https://search.nixos.org/packages?channel=unstable), en donde sí tenemos la versión 2.19.0 de `tensorflow`, y Python 3.12 y 3.13, con lo cual no deberíamos tener ningún problema.
 
@@ -171,7 +171,7 @@ Con los resultados anteriores, si queremos tener aceleración por GPU con CUDA p
 
 Una de las grandes ventajas de Nix y NixOS frente a otras distros, es la posibilidad de crear shells aislados de forma nativa, es decir no necesitamos depender de `venv` o ambientes de conda para trabajar con Phython. Lo mismo aplica para otros lenguajes de programación. Con estas mismas herramientas, también podemos definir exactamente las versiones de los paquetes que necesitamos.
 
-Como en el la sección anterior determinaos que necesitamos las veriones 2.19.0 y 2.5.1 para `tensorflow` y `torch` respectivamente, además de Python versiones 3.12 o 3.13, podemos crear un `shell` o `flake` para crear un ambiente aislado que cumpla con estos requerimientos.
+Como en el la sección anterior determinamos que necesitamos las versiones 2.19.0 y 2.5.1 para `tensorflow` y `torch` respectivamente, además de Python versiones 3.12 o 3.13, podemos crear un `shell` o `flake` para crear un ambiente aislado que cumpla con estos requerimientos.
 
 A continuación se muestran dos ejemplos de un `shell` y `flake` para crear nuestro ambiente con Python 3.12.
 
