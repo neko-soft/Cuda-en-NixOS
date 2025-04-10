@@ -46,7 +46,7 @@
             pip install --upgrade pip
 
             # Instalar keras desde PyPI (no arrastra tensorflow)
-            pip install keras # o la que sea compatible con tu TF
+            pip install keras
 
         '';
 
