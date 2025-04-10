@@ -24,13 +24,30 @@
               pandas numpy matplotlib seaborn scikit-learn openpyxl
               xlrd jupyterlab yfinance pytz
 
-              # Paquetes con aceleración por GPU con CUDA
-              tensorflowWithCuda 
-              torchWithCuda #torchvision-bin torchaudio-bin # Usar torchvision y torchaudio genera conflictos con dependencias
+              
+
+              # Paquetes SIN aceleración por GPU con cUDA
+              #tensorflow torch torchvision torchaudio
+
+              # Paquetes con aceleración por GPU con CUDA              
+              tensorflowWithCuda
+              torchWithCuda
+
             ]))
           ];
         shellHook = ''
-          echo "Entorno de Python activado."
+            echo "Entorno Python activado."
+
+            if [ ! -d .venv ]; then
+              python3 -m venv .venv
+            fi
+
+            source .venv/bin/activate
+            pip install --upgrade pip
+
+            # Instalar keras desde PyPI (no arrastra tensorflow)
+            pip install keras # o la que sea compatible con tu TF
+
         '';
 
         

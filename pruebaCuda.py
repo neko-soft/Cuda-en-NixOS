@@ -2,6 +2,15 @@
 
 import torch
 import tensorflow as tf
+import keras
+
+print("")
+print(keras.__version__)
+
+
+
+
+
 
 print("")
 print("¿Funciona CUDA para torch?")
